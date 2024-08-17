@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tugas Daspro</title>
+    <style>
+        body {
+            font-family: Arial;
+            margin: 20px;
+            background-color: #f0f0f0;
+        }
+        h1 {
+            color: #333;
+        }
+        input, button {
+            margin: 5px;
+            padding: 5px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: white;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .hapus-button {
+            background-color: #ff4444;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>To Do List</h1>
+    <div>
+        <input type="text" id="inputMember" placeholder="Nama Saya">
+        <input type="text" id="inputTugas" placeholder="Tugas Saya">
+        <input type="date" id="inputDeadline">
+        <button onclick="tambahTugas()">Tambah Tugas</button>
+    </div>
+    
+    <table id="tabelTugas">
+        <tr>
+            <th>Nama</th>
+            <th>Tugas</th>
+            <th>Tanggal</th>
+            <th>Ketuntasan</th>
+        </tr>
+    </table>
+
+    <script>
+        function tambahTugas() {
+            let nama = document.getElementById('inputMember').value;
+            let tugas = document.getElementById('inputTugas').value;
+            let tanggal = document.getElementById('inputDeadline').value;
+
+            if (nama && tugas && tanggal) {
+                let tabel = document.getElementById('tabelTugas');
+                let baris = tabel.insertRow(-1);
+                
+                baris.insertCell(0).innerHTML = nama;
+                baris.insertCell(1).innerHTML = tugas;
+                baris.insertCell(2).innerHTML = tanggal;
+                
+                let tombolHapus = document.createElement('button');
+                tombolHapus.innerHTML = 'Selesai';
+                tombolHapus.className = 'hapus-button';
+                tombolHapus.onclick = function() {
+                    tabel.deleteRow(baris.rowIndex);
+                };
+
+
+                baris.insertCell(3).appendChild(tombolHapus);
+
+                document.getElementById('inputMember').value = '';
+                document.getElementById('inputTugas').value = '';
+                document.getElementById('inputDeadline').value = '';
+            } else {
+                alert('Tolong isi semua kolom!');
+            }
+        }
+    </script>
+</body>
+</html>
